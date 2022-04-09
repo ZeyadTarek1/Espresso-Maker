@@ -1,3 +1,8 @@
+.input {
+    display: block;
+    margin: 10px auto;
+}
+
 .deliveryText {
-    text-align: left;
+    text-align: center;
 }

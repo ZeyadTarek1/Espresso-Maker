@@ -20,10 +20,33 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.post("/postdata", (req, res) => {
+app.get("/getdata", async (req, res) => {
+    try {
+        const buffer = fs.readFileSync("datajson.json");
+        dataJSON = JSON.parse(buffer);
+        console.log("Sending data");
+        let sum = 0;
+        dataJSON.forEach((element) => {
+            sum = sum + element.Espresso;
+        });
+        console.log(sum);
+        res.send(sum);
+    } catch (e) {
+        res.send(e);
+    }
+});
+
+app.post("/postdata", async (req, res) => {
     let incomingJSON = req.body;
-    res.send(incomingJSON);
-    fs.writeFile("dataJson.json", JSON.stringify(incomingJSON), (err) => {
+    try {
+        const buffer = await fs.readFileSync("datajson.json");
+        dataJSON = await JSON.parse(buffer);
+    } catch (e) {
+        res.send(e);
+    }
+    const saveData = [...dataJSON, incomingJSON];
+    console.log(saveData);
+    fs.writeFile("datajson.json", JSON.stringify(saveData), (err) => {
         console.log("Saved Data");
         if (err) {
             res.render("Error writing data");

@@ -1,7 +1,13 @@
 import React from "react";
 import "./delivery.css";
 
-const Delivery = (date, customCoffee, setCustomCoffee) => {
+const Delivery = ({ date, customCoffee, setCustomCoffee }) => {
+    const getValue = (e) => {
+        console.log("test");
+        const dataValue = e.target.value;
+        console.log(dataValue);
+        setCustomCoffee({ ...customCoffee, date: dataValue });
+    };
     return (
         <div className="delivery">
             <label htmlFor="deliveryTime">
@@ -10,18 +16,12 @@ const Delivery = (date, customCoffee, setCustomCoffee) => {
                 </p>
             </label>
             <input
+                className="input"
                 type="datetime-local"
                 id="deliveryTime"
                 name="deliveryTime"
-                defaultValue={date}
-                onChange={() => {
-                    console.log("test");
-                    // console.log(defaultValue);
-                    // setCustomCoffee(() => ({
-                    //     ...customCoffee,
-                    //     [date]: "test",
-                    // }));
-                }} //call this function when this input changes
+                defaultValue={customCoffee.date}
+                onChange={getValue} //call this function when this input changes
                 // send the new date to app (using state)
             />
         </div>

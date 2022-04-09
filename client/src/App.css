@@ -8,11 +8,15 @@
     margin: 0px 10%;
 }
 
-h1 {
+.titleText {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bolder;
     margin: 30px 10px;
 }
 .appBtn {
-    margin: 10px 10px;
+    display: block;
+    margin: auto;
     padding: 6px 14px;
     font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
     border-radius: 6px;
@@ -38,5 +42,5 @@ h1 {
     margin: 5px 10px;
     font-size: large;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
 }

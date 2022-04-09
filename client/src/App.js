@@ -40,17 +40,20 @@ function App() {
     ];
 
     const coffee = {
-        Espresso: 0,
-        Milk: 0,
-        Water: 0,
-        Sugar: 0,
+        Espresso: 1,
+        Milk: 1,
+        Water: 1,
+        Sugar: 1,
         date: null,
     };
 
     const [caffieneHistory, setCaffieneHistory] = useState(0);
     const [customCoffee, setCustomCoffee] = useState(coffee);
+    let sendFlag = false;
 
     async function sendData(submitData) {
+        if (sendFlag) return;
+        sendFlag = true;
         let tempCaffiene = caffieneHistory;
         const result = await fetch("http://localhost:5000/postdata", {
             method: "POST",
@@ -61,15 +64,26 @@ function App() {
         });
         tempCaffiene = tempCaffiene + customCoffee.Espresso;
         setCaffieneHistory(tempCaffiene);
-        console.log(result);
+        setCustomCoffee({ ...coffee }); //reset coffee
+        // console.log(result);
         if (result.status === 200) {
             console.log("Post complete");
+            getData();
         }
+        sendFlag = false;
+    }
+
+    async function getData() {
+        console.log(caffieneHistory);
+        const result = await fetch("http://localhost:5000/getdata"); //fetch data
+        let dataJson = await result.json();
+        console.log(dataJson);
+        setCaffieneHistory(dataJson); //set state to be marked
     }
 
     return (
         <div className="App">
-            <h1>Espresso Order and Delivery</h1>
+            <p className="titleText">Espresso Order and Delivery</p>
             {ingredients.map((data) => (
                 <Card
                     key={data.id}
@@ -77,6 +91,7 @@ function App() {
                     minAmount={data.minAmount}
                     maxAmount={data.maxAmount}
                     img={data.img}
+                    customCoffee={customCoffee}
                     setCustomCoffee={setCustomCoffee}
                 />
             ))}
@@ -90,7 +105,7 @@ function App() {
             </button>
             {/* do a post and save data */}
             <p className="caffieneHistory">
-                caffiene history: {caffieneHistory}
+                caffiene history: {caffieneHistory} espresso shots
             </p>
         </div>
     );
