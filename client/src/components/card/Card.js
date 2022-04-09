@@ -4,9 +4,9 @@ import "./card.css";
 const Card = ({ name, minAmount, maxAmount, img, setCustomCoffee }) => {
     const [amount, setAmount] = useState(1);
 
-    const addAmount = () => (amount >= maxAmount ? "" : setAmount(amount + 1));
+    const addAmount = () => (amount >= maxAmount ? "" : setAmount(amount + 1)); // check max amount
     const removeAmount = () =>
-        amount <= minAmount ? "" : setAmount(amount - 1);
+        amount <= minAmount ? "" : setAmount(amount - 1); //check min amount
 
     useEffect(() => {
         setCustomCoffee((customCoffee) => ({
@@ -23,8 +23,12 @@ const Card = ({ name, minAmount, maxAmount, img, setCustomCoffee }) => {
                     <b>{name}</b>
                 </h4>
                 <p>Amount : {amount} </p>
-                <button onClick={removeAmount}>Remove</button>
-                <button onClick={addAmount}>Add</button>
+                <button className="carBtn" onClick={removeAmount}>
+                    Remove
+                </button>
+                <button className="carBtn" onClick={addAmount}>
+                    Add
+                </button>
             </div>
         </div>
     );

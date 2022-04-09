@@ -47,11 +47,29 @@ function App() {
         date: null,
     };
 
+    const [caffieneHistory, setCaffieneHistory] = useState(0);
     const [customCoffee, setCustomCoffee] = useState(coffee);
+
+    async function sendData(submitData) {
+        let tempCaffiene = caffieneHistory;
+        const result = await fetch("http://localhost:5000/postdata", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(submitData),
+        });
+        tempCaffiene = tempCaffiene + customCoffee.Espresso;
+        setCaffieneHistory(tempCaffiene);
+        console.log(result);
+        if (result.status === 200) {
+            console.log("Post complete");
+        }
+    }
 
     return (
         <div className="App">
-            <h1>hello</h1>
+            <h1>Espresso Order and Delivery</h1>
             {ingredients.map((data) => (
                 <Card
                     key={data.id}
@@ -62,8 +80,18 @@ function App() {
                     setCustomCoffee={setCustomCoffee}
                 />
             ))}
-            <Delivery />
-            <button>Submit</button>
+            <Delivery
+                date={coffee.date}
+                setCustomCoffee={setCustomCoffee}
+                customCoffee={customCoffee}
+            />
+            <button className="appBtn" onClick={() => sendData(customCoffee)}>
+                Submit
+            </button>
+            {/* do a post and save data */}
+            <p className="caffieneHistory">
+                caffiene history: {caffieneHistory}
+            </p>
         </div>
     );
 }
