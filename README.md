@@ -2,9 +2,6 @@
 
 MERN stack practice
 
-The goal of this project is to develop a simple website that offers espresso delivery as a service.
-Planned features include custom drink making, delivery scheduler and caffeine history tracker.
-
 ## Table of Contents
 
 -   [Description](#description)
@@ -16,9 +13,10 @@ Planned features include custom drink making, delivery scheduler and caffeine hi
 
 ## Description
 
--   The goal of this project is to develop a simple website that offers espresso delivery as a service.
--   Planned features include custom drink making, delivery scheduler and caffine history tracker.
+-   This project is still a work in progress.
 -   This project uses React, Express and Node.
+-   The goal of this project is to develop a simple website that offers espresso delivery as a service.
+-   Planned features include custom drink making, delivery scheduler and caffeine history tracker.
 
 # Instructions
 
