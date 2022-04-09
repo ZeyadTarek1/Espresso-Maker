@@ -1,0 +1,22 @@
+{
+    "name": "espresso-maker",
+    "version": "1.0.0",
+    "description": "MERN stack practice",
+    "main": "index.js",
+    "scripts": {
+        "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\" "
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ZeyadTarek1/Espresso-Maker.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ZeyadTarek1/Espresso-Maker/issues"
+    },
+    "homepage": "https://github.com/ZeyadTarek1/Espresso-Maker#readme",
+    "devDependencies": {
+        "concurrently": "^7.1.0"
+    }
+}
