@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Card from "./components/card/Card.js";
 import Delivery from "./components/delivery/Delivery.js";
@@ -65,7 +65,6 @@ function App() {
         tempCaffiene = tempCaffiene + customCoffee.Espresso;
         setCaffieneHistory(tempCaffiene);
         setCustomCoffee({ ...coffee }); //reset coffee
-        // console.log(result);
         if (result.status === 200) {
             console.log("Post complete");
             getData();
@@ -74,12 +73,14 @@ function App() {
     }
 
     async function getData() {
-        console.log(caffieneHistory);
         const result = await fetch("http://localhost:5000/getdata"); //fetch data
         let dataJson = await result.json();
-        console.log(dataJson);
-        setCaffieneHistory(dataJson); //set state to be marked
+        setCaffieneHistory(dataJson.sum); //set state to be marked
     }
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <div className="App">

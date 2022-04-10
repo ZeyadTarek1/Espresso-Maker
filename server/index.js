@@ -29,8 +29,7 @@ app.get("/getdata", async (req, res) => {
         dataJSON.forEach((element) => {
             sum = sum + element.Espresso;
         });
-        console.log(sum);
-        res.send(sum);
+        res.send({ sum: sum });
     } catch (e) {
         res.send(e);
     }
@@ -45,7 +44,6 @@ app.post("/postdata", async (req, res) => {
         res.send(e);
     }
     const saveData = [...dataJSON, incomingJSON];
-    console.log(saveData);
     fs.writeFile("datajson.json", JSON.stringify(saveData), (err) => {
         console.log("Saved Data");
         if (err) {
@@ -53,6 +51,7 @@ app.post("/postdata", async (req, res) => {
             return;
         }
     });
+    res.send("Saved Data");
 });
 
 app.listen(port, () => {

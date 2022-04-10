@@ -3,9 +3,7 @@ import "./delivery.css";
 
 const Delivery = ({ date, customCoffee, setCustomCoffee }) => {
     const getValue = (e) => {
-        console.log("test");
         const dataValue = e.target.value;
-        console.log(dataValue);
         setCustomCoffee({ ...customCoffee, date: dataValue });
     };
     return (
